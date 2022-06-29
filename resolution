@@ -1,0 +1,39 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+#include <ctype.h>
+
+void main(){
+    setlocale (LC_ALL, "Portuguese");
+    int HT;
+    float VH, salBruto, INSS, imp, salLiq;
+    char continuar;
+    
+    do{
+    	printf("\nInforme as horas trabalhadas: ");
+		scanf("%d",&HT);
+		printf("\nInforme o pagamento por hora trabalhada: ");
+		scanf("%f", &VH);
+		salBruto = (HT*VH);
+		INSS = (salBruto *0.11);
+		
+		if((salBruto - INSS) <= 900){
+			imp = 0;
+		}
+		else if((salBruto - INSS > 900) && (salBruto - INSS <=1800)){
+			imp = ((salBruto - INSS) * 0.15);
+		}
+		else if((salBruto - INSS) > 1800){
+			imp = ((salBruto - INSS) * 0.275);
+		}
+		salLiq = (salBruto - INSS) - imp;
+		printf("\n-----------------------------------------------");
+		printf("\n|O salario liquido do funcionario e: R$%.2f|", salLiq);
+		printf("\n-----------------------------------------------");
+		printf("\nDeseja saber o salario liquido de outro funcionario?:(S/N) \n");
+		scanf(" %c", &continuar);
+		continuar = toupper(continuar);
+		printf("\n-----------------------------------------------");
+	
+	}while(continuar == 'S');
+}
